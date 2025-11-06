@@ -24,7 +24,7 @@ Object::Object(Position pos, Movement move)//, std::string name)
     //                        position_world.h, position_world.p, position_world.r};
 }
 
-void Object::operator*(const Transformation& t)
+void Object::apply(const Transformation& t)
 {
     const Eigen::Matrix4f mat = t.matrix().inverse();
     Eigen::Vector4f pos = mat * position;
@@ -45,7 +45,9 @@ void Object::operator*(const Transformation& t)
 
     // return Object{pos_world, rotation_world};//, name};
 }
-
+void Object::operator*(const Transformation& t) {   
+    apply(t);
+}
 
 auto Object::operator==(const Object& other) const -> bool
 {

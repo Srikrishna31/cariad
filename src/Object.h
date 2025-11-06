@@ -35,6 +35,7 @@ public:
      */
     // auto operator*(const Transformation& t) const -> Object;
     void operator*(const Transformation& t);
+    void apply(const Transformation& t);
 
     /**
      * Equality comparison of two objects

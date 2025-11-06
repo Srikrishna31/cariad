@@ -64,6 +64,10 @@ TEST_F(TransformationShould, TransformLotOfObjectsEasily)
     auto obj = Object(obj_pos, obj_move);//, "obj");
 
     auto objects = std::vector<Object>(1000000, obj);
+    for(auto& obj: objects)
+    {
+        obj.position_world.x += static_cast<float>(rand() % 1000) / 10.0f;
+    }
 
     auto ego_pos = Position{1.828963f, -138.407091f, -0.006f, 1.571584f, -0.004266f, -0.000046f};
     auto ego_move = Movement{-0.101049f, 13.055362f, 0.055694f, -0.000526f, 0.000976f, -0.0005126f};
@@ -82,7 +86,7 @@ TEST_F(TransformationShould, TransformLotOfObjectsEasily)
     std::for_each(std::execution::par_unseq, objects.begin(), objects.end(), [&mat](auto& obj)
     {
         // auto calc_obj = obj * mat;
-        obj * mat;
+        obj.apply(mat);
     });
     // for (const auto& object: objects)
     // {
