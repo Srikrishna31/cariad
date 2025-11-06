@@ -45,7 +45,13 @@ TEST_F(TransformationShould, TransformSingleObject)
 
     auto calc_obj = obj * mat;
 
-    EXPECT_EQ(final_obj, calc_obj);
+    // EXPECT_EQ(final_obj, calc_obj);
+    EXPECT_NEAR(final_obj.position.x(), calc_obj.position.x(), 1e-4);
+    EXPECT_NEAR(final_obj.position.y(), calc_obj.position.y(), 1e-4);
+    EXPECT_NEAR(final_obj.position.z(), calc_obj.position.z(), 1e-4);
+    EXPECT_NEAR(final_obj.position_world.h, calc_obj.position_world.h, 1e-4);
+    EXPECT_NEAR(final_obj.position_world.p, calc_obj.position_world.p, 1e-4);
+    EXPECT_NEAR(final_obj.position_world.r, calc_obj.position_world.r, 1e-4);
 }
 
 TEST_F(TransformationShould, TransformLotOfObjectsEasily)

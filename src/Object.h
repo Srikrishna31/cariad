@@ -41,7 +41,7 @@ public:
      * @return bool
      */
     auto operator==(const Object& other) const -> bool;
-private:
+// private: // todo: make private later
     Eigen::Vector4f position;
     Eigen::Vector4f movement;
     Position position_world;
