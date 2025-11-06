@@ -26,8 +26,6 @@ public:
 
     [[nodiscard]] auto matrix() const -> Eigen::Matrix4f {return matrix_;}
 
-    static Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
-            float roll, float pitch, float yaw);
 private:
     Eigen::Matrix4f matrix_;
 };
