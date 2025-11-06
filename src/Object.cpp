@@ -33,7 +33,15 @@ auto Object::operator*(const Transformation& t) const -> Object
         static_cast<float>(asin(-mat(2, 0))),
         static_cast<float>(atan2(mat(2,1), mat(2,2)))};
 
-    const auto pos_world = Position{pos.x(), pos.y(), pos.z(), rot.x(), rot.y(), rot.z()};
+
+    auto transformation_obj_mtrx = Transformation::CreateTransformationMatrix(position_world.x, position_world.y, position_world.z,
+        position_world.h, position_world.p, position_world.r);
+    auto transform_hpr = mat * transformation_obj_mtrx;
+    float yaw = atan2(transform_hpr(1, 0), transform_hpr(0, 0));
+    float pitch = asin(-transform_hpr(2, 0));
+    float roll = atan2(transform_hpr(2, 1), transform_hpr(2, 2));
+    
+    const auto pos_world = Position{pos.x(), pos.y(), pos.z(), yaw, pitch, roll};
 
     return Object{pos_world, rotation_world, name};
 }
