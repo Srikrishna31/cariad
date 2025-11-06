@@ -10,14 +10,19 @@
 class Transformation
 {
 public:
-    Transformation();
+    Transformation(float x_e, float y_e, float z_e,
+            float roll, float pitch, float yaw);
     Transformation(const Transformation&) = default;
     Transformation(Transformation&&) = default;
     Transformation& operator=(const Transformation&) = default;
     Transformation& operator=(Transformation&&) = default;
     ~Transformation() = default;
+
 private:
-    Eigen::Matrix4f matrix;
+    static Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
+            float roll, float pitch, float yaw);
+private:
+    Eigen::Matrix4f matrix_;
 };
 
 

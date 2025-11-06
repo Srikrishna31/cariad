@@ -1,3 +1,4 @@
+# bazel build "//src:object"
 cc_library(
     name = "object",
     srcs = ["Object.cpp"],
@@ -6,6 +7,7 @@ cc_library(
     deps = ["@eigen"],
 )
 
+# bazel build "//src:transformation"
 cc_library(
     name = "transformation",
     srcs = ["Transformation.cpp"],
