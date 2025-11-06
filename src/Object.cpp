@@ -5,11 +5,11 @@
 #include "Object.h"
 #include "Transformation.h"
 
-Object::Object(Position pos, Movement rot, std::string name)
+Object::Object(Position pos, Movement move, std::string name)
     : position(pos.x, pos.y, pos.z, 1.0)
-    , rotation(rot.x, rot.y, rot.z, 1.0)
+    , movement(move.x, move.y, move.z, 1.0)
     , position_world(std::move(pos))
-    , rotation_world(std::move(rot))
+    , rotation_world(std::move(move))
     , name(std::move(name))
 {}
 
@@ -39,7 +39,7 @@ auto Object::operator*(const Transformation& t) const -> Object
 auto Object::operator==(const Object& other) const -> bool
 {
     return position == other.position
-        && rotation == other.rotation
+        && movement == other.movement
         && position_world == other.position_world
         && rotation_world == other.rotation_world
         && name == other.name;

@@ -41,11 +41,9 @@ TEST_F(TransformationShould, TransformSingleObject)
 
     auto calc_obj = obj * mat;
 
-    auto counter = 0;
-    EXPECT_EQ(counter, 0);
-
     EXPECT_EQ(final_obj, calc_obj);
 }
+
 TEST_F(TransformationShould, TransformLotOfObjectsEasily)
 {
     auto counter = 0;

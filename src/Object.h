@@ -13,7 +13,7 @@ class Transformation;
 
 class Object {
 public:
-    Object(Position pos, Movement rot, std::string name);
+    Object(Position pos, Movement move, std::string name);
     Object(const Object&) = default;
     Object(Object&&) = default;
     Object& operator=(const Object&) = default;
@@ -43,7 +43,7 @@ public:
     auto operator==(const Object& other) const -> bool;
 private:
     Eigen::Vector4f position;
-    Eigen::Vector4f rotation;
+    Eigen::Vector4f movement;
     Position position_world;
     Movement rotation_world;
     std::string name;
