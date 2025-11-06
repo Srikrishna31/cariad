@@ -11,6 +11,11 @@ class Transformation
 {
 public:
     Transformation();
+    Transformation(const Transformation&) = default;
+    Transformation(Transformation&&) = default;
+    Transformation& operator=(const Transformation&) = default;
+    Transformation& operator=(Transformation&&) = default;
+    ~Transformation() = default;
 private:
     Eigen::Matrix4f matrix;
 };

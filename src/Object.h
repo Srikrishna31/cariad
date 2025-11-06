@@ -10,7 +10,11 @@
 class Object {
 public:
     Object(float x, float y, float z, float h, float p, float r);
-
+    Object(const Object&) = default;
+    Object(Object&&) = default;
+    Object& operator=(const Object&) = default;
+    Object& operator=(Object&&) = default;
+    ~Object() = default;
 
 private:
     Eigen::Vector3f position;

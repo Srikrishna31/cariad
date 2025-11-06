@@ -4,4 +4,6 @@
 
 #include "Object.h"
 
-Object::Object(float x, float y, float z, float h, float p, float r) {}
+Object::Object(float x, float y, float z, float h, float p, float r)
+    : position(x, y, z), rotation(h, p, r)
+{}
