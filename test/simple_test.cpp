@@ -47,6 +47,8 @@ int main(int argc, char **argv)
       Eigen::Vector4f obj_pos(4.985880f, 112.518f, 0.0f, 1.0f);
       // Eigen::Vector4f obj_pos(0.f, 0.0f, 0.0f, 1.0f);
 
+      std::cout << "Inverse Matrix:" << std::endl << transformation_mtrx.inverse() << std::endl;
+
       auto transformed_pos = transformation_mtrx.inverse() * obj_pos;
 
       std::cout << "Original Point: " << obj_pos.transpose() << "\n";

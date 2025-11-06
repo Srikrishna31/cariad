@@ -7,7 +7,7 @@
 
 #include "Object.h"
 
-Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
+Eigen::Matrix4f Transformation::CreateTransformationMatrix(float x_e, float y_e, float z_e,
                                            float yaw, float pitch, float roll)
 {
       Eigen::Matrix3f Rx, Ry, Rz;

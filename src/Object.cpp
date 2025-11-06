@@ -3,6 +3,9 @@
 //
 
 #include "Object.h"
+
+#include <iostream>
+
 #include "Transformation.h"
 
 Object::Object(Position pos, Movement move, std::string name)
@@ -15,19 +18,25 @@ Object::Object(Position pos, Movement move, std::string name)
 
 [[nodiscard]] auto Object::get_tranformation_matrix() const -> Transformation
 {
-    return Transformation{position_world.x, position_world.y, position_world.z,
-                           position_world.h, position_world.p, position_world.r};
-}
+    Eigen::Vector3f ego_pos(1.828963f, -138.407091f, -0.006f);
+    Eigen::Vector3f ego_hpr(1.571584f, -0.004266f, -0.000046f);
 
-Object operator*(Eigen::Vector4f::Nested lhs, const Transformation& rhs);
+    auto transformation = Transformation{Transformation::CreateTransformationMatrix(position_world.x, position_world.y, position_world.z,
+        position_world.h, position_world.p, position_world.r)};
+    std::cout << transformation.matrix() << std::endl;
+    return Transformation{Transformation::CreateTransformationMatrix(position_world.x, position_world.y, position_world.z,
+        position_world.h, position_world.p, position_world.r)};
+    // return Transformation{position_world.x, position_world.y, position_world.z,
+    //                        position_world.h, position_world.p, position_world.r};
+}
 
 auto Object::operator*(const Transformation& t) const -> Object
 {
-    auto mat = t.matrix();
+    const auto mat = t.matrix().inverse();
     Eigen::Vector4f pos = mat * position;
     Eigen::Vector3f rot =
         {static_cast<float>(atan2(mat(1,0), mat(0,0))),
-        static_cast<float>(asin(mat(2, 0))),
+        static_cast<float>(asin(-mat(2, 0))),
         static_cast<float>(atan2(mat(2,1), mat(2,2)))};
 
     const auto pos_world = Position{pos.x(), pos.y(), pos.z(), rot.x(), rot.y(), rot.z()};

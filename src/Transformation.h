@@ -14,7 +14,8 @@ class Transformation
 public:
     explicit Transformation(float x_e, float y_e, float z_e,
             float roll, float pitch, float yaw);
-    Transformation(const Transformation&) = default;
+    explicit Transformation(Eigen::Matrix4f matrix);
+        Transformation(const Transformation&) = default;
     Transformation(Transformation&&) = default;
     Transformation& operator=(const Transformation&) = default;
     Transformation& operator=(Transformation&&) = default;
@@ -41,8 +42,9 @@ public:
      */
     [[nodiscard]] auto matrix() const -> Eigen::Matrix4f {return matrix_;}
 
+    static Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
+                                           float yaw, float pitch, float roll);
 private:
-    explicit Transformation(Eigen::Matrix4f matrix);
 
     Eigen::Matrix4f matrix_;
 };
