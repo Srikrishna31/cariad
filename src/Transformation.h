@@ -32,5 +32,7 @@ private:
     Eigen::Matrix4f matrix_;
 };
 
+Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
+        float roll, float pitch, float yaw);
 
 #endif //CARIAD_TRANSFORMATION_H

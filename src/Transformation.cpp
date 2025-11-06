@@ -7,7 +7,7 @@
 
 #include "Object.h"
 
-Eigen::Matrix4f Transformation::CreateTransformationMatrix(float x_e, float y_e, float z_e,
+Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
                                                            float roll, float pitch, float yaw)
 {
     Eigen::Matrix3f Rx, Ry, Rz;
@@ -36,7 +36,7 @@ Eigen::Matrix4f Transformation::CreateTransformationMatrix(float x_e, float y_e,
 Transformation::Transformation(float x_e, float y_e, float z_e, 
     float roll, float pitch, float yaw) 
 {
-    matrix_ = Transformation::CreateTransformationMatrix(x_e, y_e, z_e, roll, pitch, yaw);
+    matrix_ = CreateTransformationMatrix(x_e, y_e, z_e, roll, pitch, yaw);
 }
 
 auto Transformation::transform(const Object& point) const -> Object
