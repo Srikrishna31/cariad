@@ -11,7 +11,10 @@ cc_test(
 # bazel run "//test:simple_test"  
 cc_binary(
     name = "simple_test",
-    srcs = ["simple_test.cpp"],
+    srcs = [
+        # "simple_test.cpp",
+        "simple_test2.cpp",
+    ],
     deps = [
         "@eigen",
     ],
