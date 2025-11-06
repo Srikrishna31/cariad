@@ -8,6 +8,7 @@
 #include "src/Transformation.h"
 #include <Eigen/Dense>
 #include <chrono>
+#include <execution>
 
 class TransformationShould: public ::testing::Test
 {
@@ -46,7 +47,7 @@ TEST_F(TransformationShould, TransformSingleObject)
 
     auto calc_obj = obj * mat;
 
-    // EXPECT_EQ(final_obj, calc_obj);
+    EXPECT_EQ(final_obj, calc_obj);
     EXPECT_NEAR(final_obj.position.x(), calc_obj.position.x(), 1e-4);
     EXPECT_NEAR(final_obj.position.y(), calc_obj.position.y(), 1e-4);
     EXPECT_NEAR(final_obj.position.z(), calc_obj.position.z(), 1e-4);
@@ -77,10 +78,14 @@ TEST_F(TransformationShould, TransformLotOfObjectsEasily)
 
     auto mat = ego.get_tranformation_matrix();
 
-    for (const auto& object: objects)
+    std::for_each(std::execution::par_unseq, objects.begin(), objects.end(), [&mat](auto& obj)
     {
-        auto calc_obj = object * mat;
-    }
+        auto calc_obj = obj * mat;
+    });
+    // for (const auto& object: objects)
+    // {
+    //     auto calc_obj = object * mat;
+    // }
 
     auto t2 = high_resolution_clock::now();
 

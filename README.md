@@ -33,3 +33,7 @@ userPath = [Environment]::GetEnvironmentVariable("Path", "User") [Environment]::
 
 Rename-Item "env:USERPROFILE\bazelisk.exe" "env:USERPROFILE\bazel.exe"
 
+## Run Test
+```shell
+bazel run //test:test_transformation
+```

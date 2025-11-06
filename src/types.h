@@ -4,7 +4,8 @@
 
 #ifndef CARIAD_TYPES_H
 #define CARIAD_TYPES_H
-#include <cfloat>
+
+constexpr float EPSILON = 1e-4;
 
 struct  Position
 {
@@ -12,12 +13,12 @@ struct  Position
     float h, p, r;
     auto operator==(const Position& position) const -> bool
     {
-        return abs(x-position.x) <= FLT_EPSILON
-        && abs(y - position.y) <= FLT_EPSILON
-        && abs(z - position.z) <= FLT_EPSILON
-        && abs(h - position.h) <= FLT_EPSILON
-        && abs(p - position.p) <= FLT_EPSILON
-        && abs(r - position.r) <= FLT_EPSILON;
+        return abs(x-position.x) <= EPSILON
+        && abs(y - position.y) <= EPSILON
+        && abs(z - position.z) <= EPSILON
+        && abs(h - position.h) <= EPSILON
+        && abs(p - position.p) <= EPSILON
+        && abs(r - position.r) <= EPSILON;
     };
 };
 
