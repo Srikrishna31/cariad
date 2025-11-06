@@ -45,15 +45,16 @@ TEST_F(TransformationShould, TransformSingleObject)
     auto final_obj_move = Movement {-13.052681f, 0.132654f, 0.243177f, 0.000487f, 0.000554f, -0.000974f};
     auto final_obj = Object(final_obj_pos, final_obj_move);//, "obj");
 
-    auto calc_obj = obj * mat;
+    // auto calc_obj = obj * mat;
+    obj * mat;
 
-    EXPECT_EQ(final_obj, calc_obj);
-    EXPECT_NEAR(final_obj.position.x(), calc_obj.position.x(), 1e-4);
-    EXPECT_NEAR(final_obj.position.y(), calc_obj.position.y(), 1e-4);
-    EXPECT_NEAR(final_obj.position.z(), calc_obj.position.z(), 1e-4);
-    EXPECT_NEAR(final_obj.position_world.h, calc_obj.position_world.h, 1e-4);
-    EXPECT_NEAR(final_obj.position_world.p, calc_obj.position_world.p, 1e-4);
-    EXPECT_NEAR(final_obj.position_world.r, calc_obj.position_world.r, 1e-4);
+    // EXPECT_EQ(final_obj, calc_obj);
+    EXPECT_NEAR(final_obj.position.x(), obj.position_ego.x, 1e-4);
+    EXPECT_NEAR(final_obj.position.y(), obj.position_ego.y, 1e-4);
+    EXPECT_NEAR(final_obj.position.z(), obj.position_ego.z, 1e-4);
+    EXPECT_NEAR(final_obj.position_world.h, obj.position_ego.h, 1e-4);
+    EXPECT_NEAR(final_obj.position_world.p, obj.position_ego.p, 1e-4);
+    EXPECT_NEAR(final_obj.position_world.r, obj.position_ego.r, 1e-4);
 }
 
 TEST_F(TransformationShould, TransformLotOfObjectsEasily)
@@ -80,7 +81,8 @@ TEST_F(TransformationShould, TransformLotOfObjectsEasily)
 
     std::for_each(std::execution::par_unseq, objects.begin(), objects.end(), [&mat](auto& obj)
     {
-        auto calc_obj = obj * mat;
+        // auto calc_obj = obj * mat;
+        obj * mat;
     });
     // for (const auto& object: objects)
     // {

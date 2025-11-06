@@ -52,9 +52,9 @@ Transformation::Transformation(float x_e, float y_e, float z_e,
     matrix_ = CreateTransformationMatrix(x_e, y_e, z_e, yaw, pitch, roll);
 }
 
-auto Transformation::transform(const Object& point) const -> Object
+void Transformation::transform( Object& point)
 {
-    return point * (*this);
+    point * (*this);
 }
 
 Transformation::Transformation(Eigen::Matrix4f matrix)

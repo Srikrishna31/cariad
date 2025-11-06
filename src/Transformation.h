@@ -27,7 +27,8 @@ public:
      * @param point : representing the object in global coordinates
      * @return transformed object.
      */
-    [[nodiscard]] auto transform(const Object& point) const -> Object;
+    // [[nodiscard]] auto transform(const Object& point) const -> Object;
+    void transform( Object& point);
 
     /**
      * Convenience operator to stack multiple transformation objects together.

@@ -24,14 +24,10 @@ Object::Object(Position pos, Movement move)//, std::string name)
     //                        position_world.h, position_world.p, position_world.r};
 }
 
-auto Object::operator*(const Transformation& t) const -> Object
+void Object::operator*(const Transformation& t)
 {
     const Eigen::Matrix4f mat = t.matrix().inverse();
     Eigen::Vector4f pos = mat * position;
-    Eigen::Vector3f rot =
-        {static_cast<float>(atan2(mat(1,0), mat(0,0))),
-        static_cast<float>(asin(-mat(2, 0))),
-        static_cast<float>(atan2(mat(2,1), mat(2,2)))};
 
     auto transformation_obj_mtrx = Transformation::CreateTransformationMatrix(position_world.x, position_world.y, position_world.z,
         position_world.h, position_world.p, position_world.r);
@@ -40,9 +36,14 @@ auto Object::operator*(const Transformation& t) const -> Object
     float pitch = asin(-transform_hpr(2, 0));
     float roll = atan2(transform_hpr(2, 1), transform_hpr(2, 2));
     
-    const auto pos_world = Position{pos.x(), pos.y(), pos.z(), yaw, pitch, roll};
+    position_ego.x = pos.x();
+    position_ego.y = pos.y();
+    position_ego.z = pos.z();
+    position_ego.h = yaw;
+    position_ego.p = pitch;
+    position_ego.r = roll;
 
-    return Object{pos_world, rotation_world};//, name};
+    // return Object{pos_world, rotation_world};//, name};
 }
 
 

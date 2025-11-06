@@ -33,7 +33,8 @@ public:
      * @param t
      * @return Object
      */
-    auto operator*(const Transformation& t) const -> Object;
+    // auto operator*(const Transformation& t) const -> Object;
+    void operator*(const Transformation& t);
 
     /**
      * Equality comparison of two objects
@@ -46,6 +47,7 @@ public:
     Eigen::Vector4f movement;
     Position position_world;
     Movement rotation_world;
+    Position position_ego;
     // std::string name;
 };
 
