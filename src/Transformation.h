@@ -12,7 +12,7 @@ class Object;
 class Transformation
 {
 public:
-    Transformation(float x_e, float y_e, float z_e,
+    explicit Transformation(float x_e, float y_e, float z_e,
             float roll, float pitch, float yaw);
     Transformation(const Transformation&) = default;
     Transformation(Transformation&&) = default;
@@ -20,13 +20,30 @@ public:
     Transformation& operator=(Transformation&&) = default;
     ~Transformation() = default;
 
+    /**
+     * Apply the current transformation to a given object, and return the
+     * transformed object.
+     * @param point : representing the object in global coordinates
+     * @return transformed object.
+     */
     [[nodiscard]] auto transform(const Object& point) const -> Object;
 
-    auto operator*(const Transformation& t) -> Transformation;
+    /**
+     * Convenience operator to stack multiple transformation objects together.
+     * @param t: The transformation object which needs to be stacked upon.
+     * @return combined transformation object.
+     */
+    auto operator*(const Transformation& t) const -> Transformation;
 
+    /**
+     * Get the underlying eigen matrix, for manipulation.
+     * @return Eigen::Matrix4f
+     */
     [[nodiscard]] auto matrix() const -> Eigen::Matrix4f {return matrix_;}
 
 private:
+    explicit Transformation(Eigen::Matrix4f matrix);
+
     Eigen::Matrix4f matrix_;
 };
 
