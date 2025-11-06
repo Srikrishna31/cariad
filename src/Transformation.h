@@ -23,7 +23,7 @@ public:
     auto transform(const Object& point) const -> Object;
 
     auto operator*(const Transformation& t) -> Transformation;
-private:
+
     static Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
             float roll, float pitch, float yaw);
 private:
