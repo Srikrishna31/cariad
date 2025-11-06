@@ -4,6 +4,6 @@
 
 #include "Object.h"
 
-Object::Object(float x, float y, float z, float h, float p, float r)
-    : position(x, y, z), rotation(h, p, r)
+Object::Object(const Position& pos, const Movement& rot, std::string name)
+    : position(pos.x, pos.y, pos.z), rotation(rot.x, rot.y, rot.z), name(std::move(name))
 {}

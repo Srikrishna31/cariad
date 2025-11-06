@@ -6,10 +6,11 @@
 #define CARIAD_OBJECT_H
 
 #include <Eigen/Eigen>
+#include "types.h"
 
 class Object {
 public:
-    Object(float x, float y, float z, float h, float p, float r);
+    Object(const Position& pos, const Movement& rot, std::string name);
     Object(const Object&) = default;
     Object(Object&&) = default;
     Object& operator=(const Object&) = default;
@@ -19,5 +20,6 @@ public:
 private:
     Eigen::Vector3f position;
     Eigen::Vector3f rotation;
+    std::string name;
 };
 #endif //CARIAD_OBJECT_H

@@ -2,7 +2,10 @@
 cc_library(
     name = "object",
     srcs = ["Object.cpp"],
-    hdrs = ["Object.h"],
+    hdrs = [
+        "Object.h",
+        "types.h",
+    ],
     visibility = ["//visibility:public"],
     deps = ["@eigen"],
 )
@@ -11,7 +14,10 @@ cc_library(
 cc_library(
     name = "transformation",
     srcs = ["Transformation.cpp"],
-    hdrs = ["Transformation.h"],
+    hdrs = [
+        "Transformation.h",
+        "types.h",
+    ],
     visibility = ["//visibility:public"],
     deps = ["@eigen"],
 )

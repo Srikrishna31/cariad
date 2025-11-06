@@ -22,6 +22,10 @@ TEST_F(TransformationShould, TransformEgo)
 
 }
 
+TEST_F(TransformationShould, TransformLotOfObjectsEasily)
+{
+
+}
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
