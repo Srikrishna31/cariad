@@ -3,7 +3,6 @@ cc_test(
     srcs = ["test_transformation.cpp"],
     tags = ["unit"],
     deps = [
-        "//src:object",
         "//src:transformation",
         "@gtest",
     ],

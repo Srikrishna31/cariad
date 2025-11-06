@@ -13,18 +13,21 @@ class Transformation;
 
 class Object {
 public:
-    Object(const Position& pos, const Movement& rot, std::string name);
+    Object(Position pos, Movement rot, std::string name);
     Object(const Object&) = default;
     Object(Object&&) = default;
     Object& operator=(const Object&) = default;
     Object& operator=(Object&&) = default;
     ~Object() = default;
 
+    [[nodiscard]] auto get_tranformation_matrix() const -> Transformation;
     auto operator*(const Transformation& t) const -> Object;
 
 private:
     Eigen::Vector4f position;
     Eigen::Vector4f rotation;
+    Position position_world;
+    Movement rotation_world;
     std::string name;
 };
 #endif //CARIAD_OBJECT_H

@@ -23,10 +23,19 @@ TEST_F(TransformationShould, TransformEgo)
 
 }
 
+TEST_F(TransformationShould, TransformSingleObject)
+{
+    auto ego_pos = Position{1.828963f, -138.407091f, -0.006f};
+    auto ego_rot = Movement{1.571584f, -0.004266f, -0.00046f};
+    auto ego = Object(ego_pos, ego_rot, "ego");
+}
 TEST_F(TransformationShould, TransformLotOfObjectsEasily)
 {
+    auto counter = 0;
 
+    EXPECT_EQ(counter, 0);
 }
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);

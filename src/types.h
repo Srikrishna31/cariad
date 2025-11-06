@@ -8,6 +8,7 @@
 struct  Position
 {
     float x, y, z;
+    float h, p, r;
 };
 
 using Movement = Position;

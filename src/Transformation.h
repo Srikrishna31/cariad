@@ -20,9 +20,11 @@ public:
     Transformation& operator=(Transformation&&) = default;
     ~Transformation() = default;
 
-    auto transform(const Object& point) const -> Object;
+    [[nodiscard]] auto transform(const Object& point) const -> Object;
 
     auto operator*(const Transformation& t) -> Transformation;
+
+    [[nodiscard]] auto matrix() const -> Eigen::Matrix4f {return matrix_;}
 
     static Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
             float roll, float pitch, float yaw);
