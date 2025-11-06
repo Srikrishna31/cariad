@@ -5,13 +5,14 @@
 #ifndef CARIAD_TRANSFORMATION_H
 #define CARIAD_TRANSFORMATION_H
 
+#include <Eigen/Eigen>
 
 class Transformation
 {
 public:
     Transformation();
 private:
-    Matrix4f matrix;
+    Eigen::Matrix4f matrix;
 };
 
 

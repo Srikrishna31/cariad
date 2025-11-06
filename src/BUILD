@@ -9,4 +9,5 @@ cc_library(
     name = "transformation",
     srcs = ["Transformation.cpp"],
     hdrs = ["Transformation.h"],
+    deps = ["@eigen"],
 )
