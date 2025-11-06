@@ -13,7 +13,7 @@ class Transformation;
 
 class Object {
 public:
-    Object(Position pos, Movement move, std::string name);
+    Object(Position pos, Movement move);//, std::string name);
     Object(const Object&) = default;
     Object(Object&&) = default;
     Object& operator=(const Object&) = default;
@@ -46,7 +46,7 @@ public:
     Eigen::Vector4f movement;
     Position position_world;
     Movement rotation_world;
-    std::string name;
+    // std::string name;
 };
 
 #endif //CARIAD_OBJECT_H

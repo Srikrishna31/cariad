@@ -8,12 +8,12 @@
 
 #include "Transformation.h"
 
-Object::Object(Position pos, Movement move, std::string name)
+Object::Object(Position pos, Movement move)//, std::string name)
     : position(pos.x, pos.y, pos.z, 1.0)
     , movement(move.x, move.y, move.z, 1.0)
     , position_world(std::move(pos))
     , rotation_world(std::move(move))
-    , name(std::move(name))
+    // , name(std::move(name))
 {}
 
 [[nodiscard]] auto Object::get_tranformation_matrix() const -> Transformation
@@ -33,7 +33,6 @@ auto Object::operator*(const Transformation& t) const -> Object
         static_cast<float>(asin(-mat(2, 0))),
         static_cast<float>(atan2(mat(2,1), mat(2,2)))};
 
-
     auto transformation_obj_mtrx = Transformation::CreateTransformationMatrix(position_world.x, position_world.y, position_world.z,
         position_world.h, position_world.p, position_world.r);
     auto transform_hpr = mat * transformation_obj_mtrx;
@@ -43,7 +42,7 @@ auto Object::operator*(const Transformation& t) const -> Object
     
     const auto pos_world = Position{pos.x(), pos.y(), pos.z(), yaw, pitch, roll};
 
-    return Object{pos_world, rotation_world, name};
+    return Object{pos_world, rotation_world};//, name};
 }
 
 
@@ -52,6 +51,6 @@ auto Object::operator==(const Object& other) const -> bool
     return position == other.position
         && movement == other.movement
         && position_world == other.position_world
-        && rotation_world == other.rotation_world
-        && name == other.name;
+        && rotation_world == other.rotation_world;
+        // && name == other.name;
 }
