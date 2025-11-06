@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     
     Eigen::Vector3f ego_pos(1.828963f, -138.407091f, -0.006f);
     // Eigen::Vector3f ego_hpr(1.571584f, -0.004266f, -0.000046f);
-    Eigen::Vector3f ego_rpy(-0.000046f, -0.004266f,  1.571584f);
+    Eigen::Vector3f ego_hpr(-0.000046f, -0.004266f,  1.571584f);
 
     auto transformation_mtrx = CreateTransformationMatrix(ego_pos(0), ego_pos(1), ego_pos(2),
                                                                 ego_hpr(0), ego_hpr(1), ego_hpr(2));
