@@ -27,7 +27,7 @@ Eigen::Matrix4f Transformation::CreateTransformationMatrix(float x_e, float y_e,
 
     Eigen::Matrix4f T = Eigen::Matrix4f::Identity();
     T.block<3,3>(0,0) = R;
-    T.block<1,3>(3,0) << x_e, y_e, z_e;
+    T.block<3,1>(0,3)  << x_e, y_e, z_e;
 
     return T;
 }

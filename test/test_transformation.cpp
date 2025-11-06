@@ -6,6 +6,7 @@
 
 #include "src/Object.h"
 #include "src/Transformation.h"
+#include <Eigen/Dense>
 
 class TransformationShould: public ::testing::Test
 {
