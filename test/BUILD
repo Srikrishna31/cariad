@@ -8,9 +8,9 @@ cc_test(
     ],
 )
 
-# bazel run "//test:simple_test"  
+# bazel run "//test:simple_test2"
 cc_binary(
-    name = "simple_test",
+    name = "simple_test2",
     srcs = [
         # "simple_test.cpp",
         "simple_test2.cpp",
@@ -18,4 +18,15 @@ cc_binary(
     deps = [
         "@eigen",
     ],
-)   
+)
+
+# bazel run "//test:simple_test1"
+cc_binary(
+    name = "simple_test",
+    srcs = [
+        "simple_test.cpp",
+    ],
+    deps = [
+        "@eigen",
+    ],
+)
