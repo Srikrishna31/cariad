@@ -40,7 +40,7 @@ public:
      * Get the underlying eigen matrix, for manipulation.
      * @return Eigen::Matrix4f
      */
-    [[nodiscard]] auto matrix() const -> Eigen::Matrix4f {return matrix_;}
+    [[nodiscard]] auto matrix() const -> const Eigen::Matrix4f& {return matrix_;}
 
     static Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
                                            float yaw, float pitch, float roll);

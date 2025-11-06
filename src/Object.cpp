@@ -28,10 +28,6 @@ auto Object::operator*(const Transformation& t) const -> Object
 {
     const Eigen::Matrix4f mat = t.matrix().inverse();
     Eigen::Vector4f pos = mat * position;
-    Eigen::Vector3f rot =
-        {static_cast<float>(atan2(mat(1,0), mat(0,0))),
-        static_cast<float>(asin(-mat(2, 0))),
-        static_cast<float>(atan2(mat(2,1), mat(2,2)))};
 
     auto transformation_obj_mtrx = Transformation::CreateTransformationMatrix(position_world.x, position_world.y, position_world.z,
         position_world.h, position_world.p, position_world.r);
