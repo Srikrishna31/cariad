@@ -7,6 +7,7 @@
 #include "src/Object.h"
 #include "src/Transformation.h"
 #include <Eigen/Dense>
+#include <chrono>
 
 class TransformationShould: public ::testing::Test
 {
@@ -56,6 +57,42 @@ TEST_F(TransformationShould, TransformSingleObject)
 
 TEST_F(TransformationShould, TransformLotOfObjectsEasily)
 {
+    auto obj_pos = Position {4.985880f, 112.5180f, 0.0f, 6.234840f, 0.0f, 0.0f};
+    auto obj_move = Movement {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+    auto obj = Object(obj_pos, obj_move, "obj");
+
+    auto objects = std::vector<Object>(1000000, obj);
+
+    auto ego_pos = Position{1.828963f, -138.407091f, -0.006f, 1.571584f, -0.004266f, -0.000046f};
+    auto ego_move = Movement{-0.101049f, 13.055362f, 0.055694f, -0.000526f, 0.000976f, -0.0005126f};
+    auto ego = Object(ego_pos, ego_move, "ego");
+
+    using std::chrono::high_resolution_clock;
+    using std::chrono::duration_cast;
+    using std::chrono::duration;
+    using std::chrono::milliseconds;
+
+
+    auto t1 = high_resolution_clock::now();
+
+    auto mat = ego.get_tranformation_matrix();
+
+    for (const auto& object: objects)
+    {
+        auto calc_obj = object * mat;
+    }
+
+    auto t2 = high_resolution_clock::now();
+
+    /* Getting number of milliseconds as an integer. */
+    auto ms_int = duration_cast<milliseconds>(t2 - t1);
+
+    /* Getting number of milliseconds as a double. */
+    duration<double, std::milli> ms_double = t2 - t1;
+
+    std::cout << ms_int.count() << "ms\n";
+    std::cout << ms_double.count() << "ms\n";
+
     auto counter = 0;
 
     EXPECT_EQ(counter, 0);
