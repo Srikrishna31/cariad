@@ -27,13 +27,7 @@ Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
       Eigen::Matrix4f T = Eigen::Matrix4f::Identity();
       T.block<3, 3>(0, 0) = R;
       T.block<3, 1>(0, 3) << x_e, y_e, z_e;
-
-    std::fstream file("/home/krishnachaa/cariad/test/test.txt", std::ios::out | std::ios::app);
-    file << "Here is the matrix m:\n" << T << '\n';
-    if (file.is_open())
-    {
-        file << "Here is the matrix m:\n" << T << '\n';
-    }
+    
       return T;
 }
 
@@ -52,11 +46,20 @@ int main(int argc, char **argv)
       std::cout << "Transformation Matrix:\n"
                 << transformation_mtrx << std::endl;
       Eigen::Vector4f obj_pos(4.985880f, 112.518f, 0.0f, 1.0f);
+      Eigen::Vector4f obj_hpr(6.234840f, 0.0f, 0.0f, 1.0f);
       // Eigen::Vector4f obj_pos(0.f, 0.0f, 0.0f, 1.0f);
 
       std::cout << "Inverse Matrix:" << std::endl << transformation_mtrx.inverse() << std::endl;
 
       auto transformed_pos = transformation_mtrx.inverse() * obj_pos;
+
+      auto transformation_obj_mtrx = CreateTransformationMatrix(obj_pos(0), obj_pos(1), obj_pos(2),
+                                                                obj_hpr(2), obj_hpr(1), obj_hpr(0));
+      auto transform_hpr = transformation_mtrx.inverse() * transformation_obj_mtrx;
+      float yawt = atan2(transform_hpr(1, 0), transform_hpr(0, 0));
+      float pitcht = asin(-transform_hpr(2, 0));
+      float rollt = atan2(transform_hpr(2, 1), transform_hpr(2, 2));
+      std::cout << "Transform hpr YAW: " << yawt << " PITCH: " << pitcht << " ROLL: " << rollt << std::endl;
 
       std::cout << "Original Point: " << obj_pos.transpose() << "\n";
       std::cout << "Transformed Point: " << transformed_pos.transpose() << "\n";
