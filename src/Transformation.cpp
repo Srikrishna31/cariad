@@ -44,4 +44,14 @@ auto Transformation::transform(const Object& point) const -> Object
     return point * (*this);
 }
 
-auto operator*(const Transformation& t) -> Transformation;
+Transformation::Transformation(Eigen::Matrix4f matrix)
+    : matrix_(std::move(matrix))
+{}
+
+
+auto Transformation::operator*(const Transformation& t) const -> Transformation
+{
+    Eigen::Matrix4f mat = t.matrix_ * matrix_;
+
+    return Transformation{std::move(mat)};
+}
