@@ -34,3 +34,13 @@ auto Object::operator*(const Transformation& t) const -> Object
 
     return Object{pos_world, rotation_world, name};
 }
+
+
+auto Object::operator==(const Object& other) const -> bool
+{
+    return position == other.position
+        && rotation == other.rotation
+        && position_world == other.position_world
+        && rotation_world == other.rotation_world
+        && name == other.name;
+}

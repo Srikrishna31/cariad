@@ -23,6 +23,7 @@ public:
     [[nodiscard]] auto get_tranformation_matrix() const -> Transformation;
     auto operator*(const Transformation& t) const -> Object;
 
+    auto operator==(const Object& other) const -> bool;
 private:
     Eigen::Vector4f position;
     Eigen::Vector4f rotation;
