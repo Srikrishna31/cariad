@@ -4,6 +4,7 @@
 #include <memory>
 #include <Eigen/Dense>
 #include <iostream>
+#include <fstream>
 
 Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
                                            float yaw, float pitch, float roll)
@@ -27,6 +28,12 @@ Eigen::Matrix4f CreateTransformationMatrix(float x_e, float y_e, float z_e,
       T.block<3, 3>(0, 0) = R;
       T.block<3, 1>(0, 3) << x_e, y_e, z_e;
 
+    std::fstream file("/home/krishnachaa/cariad/test/test.txt", std::ios::out | std::ios::app);
+    file << "Here is the matrix m:\n" << T << '\n';
+    if (file.is_open())
+    {
+        file << "Here is the matrix m:\n" << T << '\n';
+    }
       return T;
 }
 

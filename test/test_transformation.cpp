@@ -34,6 +34,7 @@ TEST_F(TransformationShould, TransformSingleObject)
     auto obj = Object(obj_pos, obj_move, "obj");
 
     auto mat = ego.get_tranformation_matrix();
+    std::cout << "Transformation Matrix:\n" << mat.matrix() << std::endl;
 
     auto inv_mat = mat.matrix().inverse();
     std::cout << "Inverse Matrix:\n" << inv_mat << std::endl;

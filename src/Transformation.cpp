@@ -6,22 +6,36 @@
 #include <Eigen/Dense>
 
 #include "Object.h"
+#include <fstream>
 
 Eigen::Matrix4f Transformation::CreateTransformationMatrix(float x_e, float y_e, float z_e,
                                            float yaw, float pitch, float roll)
 {
-      Eigen::Matrix3f Rx, Ry, Rz;
-      Rx << 1, 0, 0,
-          0, cos(yaw), -sin(yaw),
-          0, sin(yaw), cos(yaw);
+    Eigen::Matrix3f Rx, Ry, Rz;
+      // Rx << 1, 0, 0,
+      //     0, cos(yaw), -sin(yaw),
+      //     0, sin(yaw), cos(yaw);
+      //
+      // Ry << cos(pitch), 0, sin(pitch),
+      //     0, 1, 0,
+      //     -sin(pitch), 0, cos(pitch);
+      //
+      // Rz << cos(roll), -sin(roll), 0,
+      //     sin(roll), cos(roll), 0,
+      //     0, 0, 1;
 
-      Ry << cos(pitch), 0, sin(pitch),
-          0, 1, 0,
-          -sin(pitch), 0, cos(pitch);
+    // For some reason, roll and yaw have to be swapped for correct results.
+    Rx << 1, 0, 0,
+    0, cos(roll), -sin(roll),
+    0, sin(roll), cos(roll);
 
-      Rz << cos(roll), -sin(roll), 0,
-          sin(roll), cos(roll), 0,
-          0, 0, 1;
+    Ry << cos(pitch), 0, sin(pitch),
+        0, 1, 0,
+        -sin(pitch), 0, cos(pitch);
+
+    Rz << cos(yaw), -sin(yaw), 0,
+        sin(yaw), cos(yaw), 0,
+        0, 0, 1;
 
       Eigen::Matrix3f R = Rz * Ry * Rx;
 
